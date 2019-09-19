@@ -1,7 +1,7 @@
 FROM python:3.7-alpine
-RUN mkdir app
-COPY . ./app
-WORKDIR /app
+RUN mkdir multiply
+COPY . ./multiply
+WORKDIR /multiply
 RUN pip install -r requirements.txt
 EXPOSE 8484:5151
-CMD python app.py
+CMD python multiply.py

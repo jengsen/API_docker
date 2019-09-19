@@ -1,7 +1,7 @@
-from flask import Flask
+import flask
 from flask import request
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 
 @app.route("/")
 def home():
@@ -11,14 +11,20 @@ def home():
 def login(username):
     return "hello " + username
 
+#@app.route('/hello', methods=['POST'])
+#def login_post():
+#    data=flask.request.get_json(force=True)
+#    return "hello " + data["username"]
+
 @app.route("/multiply/<number>/<multiplier>")
 def gryshka(number, multiplier):
     return "Your {} * {} is {}".format(number, multiplier, float(number) * float(multiplier))
 
-@app.route("/subtract/<number>/<subtract>")
-def substract(number, subtract):
-    result = float(number) - float(subtract)
-    return "{} minus {} is {}".format(number, subtract, result)
+@app.route("/substract", methods=['POST'])
+def substract():
+    data = flask.request.get_json(force=True)
+    result=data['x']-data['y']
+    return {'result': result}
 
 # @app.route("/add")
 # def add():
